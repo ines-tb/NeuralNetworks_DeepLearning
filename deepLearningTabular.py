@@ -91,3 +91,18 @@ nn.add(Dense(units=1, activation="sigmoid"))
 nn.summary()
 
 # %%
+# Compile the model
+nn.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
+
+# %%
+# TRAIN AND EVALUATE THE MODEL
+# *******************************
+
+# Train the model
+fitmodel = nn.fit(XTrain, yTrain, epochs=100)
+
+# %%
+# Evaluate the model using the test data
+modelLoss, modelAccuracy = nn.evaluate(XTest, yTest, verbose=2)
+print(f"Loss: {modelLoss}, Accuracy: {modelAccuracy}")
+# %%
