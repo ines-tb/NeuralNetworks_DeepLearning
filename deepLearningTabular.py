@@ -4,6 +4,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler,OneHotEncoder
 import pandas as pd
 import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 
 
 # %%
@@ -62,5 +64,30 @@ XScaler = scaler.fit(XTrain)
 # Scale the data
 XTrainScaled = XScaler.transform(XTrain)
 XTestScaled = XScaler.transform(XTest)
+
+# %%
+# CREATE DEEP LEARNING MODEL
+# *******************************
+
+# Define the model - deep neural net
+numberInputFeatures = len(XTrain[0])
+hiddenNodesLayer1 =  8
+hiddenNodesLayer2 = 5
+
+nn = Sequential()
+
+# First hidden layer
+nn.add(
+    Dense(units=hiddenNodesLayer1, input_dim=numberInputFeatures, activation="relu")
+)
+
+# Second hidden layer
+nn.add(Dense(units=hiddenNodesLayer2, activation="relu"))
+
+# Output layer
+nn.add(Dense(units=1, activation="sigmoid"))
+
+# Check the structure of the model
+nn.summary()
 
 # %%
